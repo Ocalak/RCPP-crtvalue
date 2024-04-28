@@ -50,44 +50,7 @@ crit.val(reps=10, k=1, n=10, Quantile = c(0.9,0.95,0.99,0.995,0.999), eps=0.01)
 print( Sys.time() - start )
 
 
-library(RcppArmadillo)
-RcppArmadillo::compileArmadilloCode()
-install.packages("Rcpp")
-library(Rcpp)
-Rcpp::sourceCpp('crtvalue.cpp')
-initdata <- rnorm(1000, mean = 21, sd = 10)
-bootstrap_cpp(initdata)
 
-# Function declaration
-bootstrap_r <- function(ds, B = 1000) {
-  # Preallocate storage for statistics
-  boot_stat <- matrix(NA, nrow = B, ncol = 2)
-  # Number of observations
-  n <- length(ds)
-  # Perform bootstrap
-  for(i in seq_len(B)) {
-    # Sample initial data
-    gen_data <- ds[ sample(n, n, replace=TRUE) ]
-    # Calculate sample data mean and SD
-    boot_stat[i,] <- c(mean(gen_data),
-                       sd(gen_data))
-  }
-  # Return bootstrap result
-  return(boot_stat)
-}
-
-set.seed(512)
-# Generate data
-initdata <- rnorm(1000, mean = 21, sd = 10)
-# Set a new _different_ seed for bootstrapping
-set.seed(883)
-# Perform bootstrap
-result_r <- bootstrap_r(initdata)
-
-Rcpp::sourceCpp('try.cpp')
-crtvalue(reps=10,k=5,n=10,eps=0.01)
-Rcpp::sourceCpp('gggg.cpp')
-Rcpp::sourceCpp('Untitled.cpp')
 Rcpp::sourceCpp('try.cpp')
 Rcpp::sourceCpp('ttt.cpp')
 
