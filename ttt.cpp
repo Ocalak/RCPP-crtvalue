@@ -51,12 +51,12 @@ Rcpp::NumericVector getW(int reps, int k, int n, double eps) {
       }
       
       // Compute M1 and M2 matrices
-      Rcpp::NumericMatrix M1 = inter1 * arma::trans(inter1) / n_squared;
-      Rcpp::NumericMatrix M2 = inter2 * inter2.t() / n_squared;
+      Rcpp::NumericMatrix M1 = inter1 * inter1.t() / n_squared;// Issue here. Error1: t() function is not exist. I use arma:trans it didnt work as well. 
+      Rcpp::NumericMatrix M2 = inter2 * inter2.t() / n_squared;// Same issue as well. 
       
       // Calculate substat[t] using the quadratic form
       Rcpp::NumericVector diff = scale[t] * (mean1 - mean2);
-      substat[t] = n * crossprod(diff,solve(M1 + M2, diff));
+      substat[t] = n * crossprod(diff,solve(M1 + M2, diff)); // Last issue. Cannot use solve() function.  arma::solve doesnt work as well. 
     }
     
     // Store the maximum of the substatistics adjusted for eps
