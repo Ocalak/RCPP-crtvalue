@@ -15,7 +15,7 @@ Rcpp::NumericVector extract_row_slice(const Rcpp::NumericMatrix& data, int row, 
 
 // Main function to compute critical values
 // [[Rcpp::export]]
-Rcpp::NumericVector crit_val_cpp(int reps, int k, int n, double Quantile, double eps) {
+Rcpp::NumericVector getW(int reps, int k, int n, double eps) {
   Rcpp::NumericVector W(reps);
   int sublength = n - 1;
   double n_squared = n * n;
