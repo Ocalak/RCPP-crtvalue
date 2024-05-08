@@ -51,6 +51,4 @@ print( Sys.time() - start )
 
 
 
-Rcpp::sourceCpp('try.cpp')
-Rcpp::sourceCpp('ttt.cpp')
 
